@@ -1,16 +1,21 @@
 html, body {
-  height: 100%; width: 100%;
-  padding: 0; margin: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-  background: url(images/ny-background.jpg)  no-repeat bottom center;
+  background: url(images/ny-background.jpg) no-repeat bottom center;
 }
 
 .form-dialog {
   width: 330px;
   margin: auto;
-  top: 0; left: 0; bottom: 0; right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   border-radius: 5px;
   background-color: #fcfcfc;
   padding: 0 20px;
@@ -30,40 +35,38 @@ body {
   padding: 15px;
 }
 
-.form-dialog h5 {  
+.form-dialog h5 {
   font-family: arial;
   font-weight: normal;
   margin: 15px 0;
 }
 
 .form-dialog input[type=button] {
-	background-color: #3C8DBC;
-	border-radius: 1px;
-	border: 1px solid #3987B4;
-	display: inline-block;
-	cursor: pointer;
-	color: #ffffff;
-	font-family: Arial;
-	font-size: 15px;
-	padding: 9px 23px;
+  background-color: #3C8DBC;
+  border-radius: 1px;
+  border: 1px solid #3987B4;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 9px 23px;
 }
 
 .form-dialog input[type=button]:hover {
-	background-color:rgb(54, 128, 170);
+  background-color: rgb(54, 128, 170);
 }
 
 .form-dialog input[type=button]:active {
-	position:relative;
-	top:1px;
+  position: relative;
+  top: 1px;
 }
 
 .form-dialog .input-block {
   font: 400 13.3333px sans-serif;
 }
 
-
-
-.form-dialog .input-block > input {
+.form-dialog .input-block>input, .form-dialog .input-block>select {
   width: 100%;
   padding: 10px 14px;
   margin: 7px 0;
@@ -73,18 +76,17 @@ body {
   box-sizing: border-box;
 }
 
-.form-dialog .input-block.error > input{
+.form-dialog .input-block.error>input, .form-dialog .input-block.error>select {
   font: 400 13.3333px sans-serif;
   border: 1px solid #E67E72;
 }
 
-.form-dialog .input-block > .error-message {
+.form-dialog .input-block>.error-message {
   display: none;
 }
 
-.form-dialog .input-block.error > .error-message {
+.form-dialog .input-block.error>.error-message {
   padding: 0 2px;
   display: block;
   color: #E67E72;
 }
-

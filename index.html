@@ -6,45 +6,46 @@
 </head>
 
 <body>
-  <dialog id='dialogInitial' class = 'form-dialog'>
+  <dialog id='dialogInitial' class='form-dialog'>
     <form>
       <header>
         <h5>Register a new User</h5>
       </header>
 
-      <div class = 'input-block'>
-        <input type="text" id="firstName" name="firstname" placeholder="First Name*">
-        <div class = 'error-message'>This field is required</div>
+      <div class='input-block'>
+        <input type="text" id="firstName"  placeholder="First Name*">
+        <div class='error-message'>This field is required</div>
       </div>
 
-      <div class = 'input-block'>
-        <input type="text" id="lastName" name="lastname" placeholder="Last Name*">
-        <div class = 'error-message'>This field is required</div>
+      <div class='input-block'>
+        <input type="text" id="lastName" placeholder="Last Name*">
+        <div class='error-message'>This field is required</div>
       </div>
 
-      <div class = 'input-block'>
-        <input type="text" id="login" name="login" placeholder="Login*">
-        <div class = 'error-message'>This field is required</div>
+      <div class='input-block'>
+        <input type="text" id="login" placeholder="Login*">
+        <div class='error-message'>This field is required</div>
       </div>
 
-      <div class = 'input-block'>
-        <input type="email" id="email" name="email" placeholder="Email*">
-        <div class = 'error-message'>This field is required</div>
+      <div class='input-block'>
+        <input type="email" id="email" placeholder="Email*">
+        <div class='error-message'>This field is required</div>
       </div>
 
-      <div class = 'input-block'>
-        <input type="text" id="companyName" name="companyName" placeholder="Company Name">
+      <div class='input-block'>
+        <input type="text" id="companyName" placeholder="Company Name">
       </div>
 
-      <div class = 'input-block'>
-        <input type="password" id="password" name="password" placeholder="Password">
-        <div class = 'error-message'>Required at least one number (0-9), uppercase and lowercase letters (a-Z) and at least one special character (!@#$%^&*~)</div>
+      <div class='input-block'>
+        <input type="password" id="password" placeholder="Password">
+        <div class='error-message'>Required at least one number (0-9), uppercase and lowercase letters (a-Z) and at
+          least one special character (!@#$%^&*~)</div>
       </div>
 
-      <div class = 'input-block'>
-        <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm Password">
-        <div class = 'error-message'>Must be equal to password</div>      
-     </div>
+      <div class='input-block'>
+        <input type="password" id="passwordConfirm" placeholder="Confirm Password">
+        <div class='error-message'>Must be equal to password</div>
+      </div>
 
       <footer>
         <input id='btnNextInitial' type="button" value="Next Step">
@@ -52,23 +53,40 @@
 
     </form>
   </dialog>
-  <dialog id='dialogSpec'>
-    <form>
-      <select id="country" name="country">
-        <option value="australia">Australia</option>
-        <option value="canada">Canada</option>
-        <option value="usa">USA</option>
-      </select>
 
-      <input type="submit" value="Submit">
+  <dialog id='dialogSpec' class='form-dialog'>
+    <form>
+      <header>
+        <h5>Choose your specialization</h5>
+      </header>
+
+      <div class='input-block'>
+        <select id="departmentSelect">
+          <option value="" selected disabled>Department</option>      
+        </select>
+      </div>
+      <div class='input-block'>
+        <select id="vacancySelect">
+          <option value="" selected disabled>Vacancy</option>
+        </select>
+      </div>
+
+
+
+      <footer>
+        <input id='btnNextSpec' type="button" value="Next Step">
+      </footer>
+
     </form>
   </dialog>
+
   <dialog id='dialogCheck'>
     <form>
 
       <input type="submit" value="Submit">
     </form>
   </dialog>
+
   <script type="module" src='./js/index.js'></script>
 </body>
 

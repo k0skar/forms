@@ -1,5 +1,5 @@
 import InitialDialog from "./InitialDialog.js";
-import * as data from './specs.js';
+import SpecDialog from "./SpecDialog.js";
 
 class DialogManager {
 
@@ -20,10 +20,11 @@ class DialogManager {
             },
         }
 
-        this.initialDialog = new InitialDialog(this);
-        // this.specDialog = new SpecDialog(this);
-        // this.checkDialog = new CheckDialog(this);
+        this.initialDialog = new InitialDialog(this, 'dialogInitial');
+        this.specDialog = new SpecDialog(this, 'dialogSpec');
+        //this.checkDialog = new CheckDialog(this, 'dialogCheck');
         this.initialDialog.open();
+        //this.specDialog.open();
     }
 
 
@@ -33,13 +34,14 @@ class DialogManager {
         }
         
         this.initialDialog.close();
-        // this.specDialog.open();
+        this.specDialog.open();
     }
 
     procedeNextSpecDialog(dialogState) {
 
         this.state.specDialog = dialogState;
-        // this.specDialog.close();
+        this.specDialog.close();
+        console.log(this.state)
         // this.checkDialog.open();
     }
     

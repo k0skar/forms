@@ -1,50 +1,34 @@
+import Dialog from "./Dialog.js"
 
-export default class InitialDialog {
+export default class InitialDialog extends Dialog {
 
-    constructor(dialogManager) {
-        this.dialogManager = dialogManager;
-        this.htmlElement = document.getElementById('dialogInitial');
-        const nextButton = this.htmlElement.querySelector('#btnNextInitial');
-        nextButton.addEventListener('click', this.onNextBtnInitialDialog.bind(this))
-        this.htmlInputs = {
-            firstName: this.htmlElement.querySelector('#firstName'),
-            lastName: this.htmlElement.querySelector('#lastName'),
-            login: this.htmlElement.querySelector('#login'),
-            email: this.htmlElement.querySelector('#email'),
-            companyName: this.htmlElement.querySelector('#companyName'),
-            password: this.htmlElement.querySelector('#password'),
-            passwordConfirm: this.htmlElement.querySelector('#passwordConfirm'),
+    constructor(dialogManager, id) {
+        super(...arguments);
+        const nextButton = this.domElement.querySelector('#btnNextInitial');
+        nextButton.addEventListener('click', (e) => this.onNextBtnClick(e));
+        this.inputsDomEl = {
+            firstName: this.domElement.querySelector('#firstName'),
+            lastName: this.domElement.querySelector('#lastName'),
+            login: this.domElement.querySelector('#login'),
+            email: this.domElement.querySelector('#email'),
+            companyName: this.domElement.querySelector('#companyName'),
+            password: this.domElement.querySelector('#password'),
+            passwordConfirm: this.domElement.querySelector('#passwordConfirm'),
         };
     }
 
-    open() {
-        if (this.htmlElement.show && typeof this.htmlElement.show === 'function') {
-            this.htmlElement.show();
-        } else {
-            this.htmlElement.setAttribute('open')
-        }
-
-    }
-
-    close() {
-        if (this.htmlElement.close && typeof this.htmlElement.close === 'function') {
-            this.htmlElement.close();
-        } else {
-            this.htmlElement.removeAttribute('open')
-        }
-    }
-
-    onNextBtnInitialDialog(e) {
+    onNextBtnClick(e) {
         const inputValues = this.processInputs();
+        
         if (inputValues) {
             this.dialogManager.procedeNextInitialDialog(inputValues);
         }
     }
 
     processInputs() {
-        
-        for (const key in this.htmlInputs) {
-            this.htmlInputs[key].parentElement.classList.remove('error')
+
+        for (const key in this.inputsDomEl) {
+            this.inputsDomEl[key].parentElement.classList.remove('error')
         }
 
         const inputValues = {
@@ -65,14 +49,14 @@ export default class InitialDialog {
             }
 
         }
-        
+
         return allInputsAreValid ? inputValues : false
     }
 
     processFirstName() {
 
         const nonEmptyLettersOnly = new RegExp('^[A-Za-z]+$');
-        const firstName = this.htmlInputs.firstName;
+        const firstName = this.inputsDomEl.firstName;
 
         if (firstName.value.match(nonEmptyLettersOnly)) {
             return firstName.value
@@ -85,7 +69,7 @@ export default class InitialDialog {
     processLastName() {
 
         const nonEmptyLettersOnly = new RegExp('^[A-Za-z]+$');
-        const lastName = this.htmlInputs.lastName;
+        const lastName = this.inputsDomEl.lastName;
 
         if (lastName.value.match(nonEmptyLettersOnly)) {
             return lastName.value
@@ -95,9 +79,9 @@ export default class InitialDialog {
         }
     }
 
-    processLogin(regEx) {
+    processLogin() {
 
-        const login = this.htmlInputs.login;
+        const login = this.inputsDomEl.login;
 
         if (login.value.trim().length > 0) {
             return login.value
@@ -110,7 +94,7 @@ export default class InitialDialog {
     processEmail() {
 
         const emailRegExp = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
-        const email = this.htmlInputs.email;
+        const email = this.inputsDomEl.email;
 
         if (email.value.match(emailRegExp)) {
             return email.value
@@ -122,13 +106,13 @@ export default class InitialDialog {
 
     processCompanyName() {
 
-        return this.htmlInputs.companyName.value
+        return this.inputsDomEl.companyName.value
     }
 
-    processPassword(regEx) {
+    processPassword() {
 
         const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*~])[A-Za-z\d!@#$%^&*~]/;
-        const password = this.htmlInputs.password;
+        const password = this.inputsDomEl.password;
 
         if (password.value.match(passwordRegEx)) {
             return password.value
@@ -140,8 +124,8 @@ export default class InitialDialog {
 
     processPasswordConfirm() {
 
-        const password = this.htmlInputs.password;
-        const passwordConfirm = this.htmlInputs.passwordConfirm;
+        const password = this.inputsDomEl.password;
+        const passwordConfirm = this.inputsDomEl.passwordConfirm;
 
         if (password.value && password.value === passwordConfirm.value) {
             return passwordConfirm.value
