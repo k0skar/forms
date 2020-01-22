@@ -25,8 +25,8 @@ class DialogManager {
         this.initialDialog = new InitialDialog(this, 'dialogInitial');
         this.specDialog = new SpecDialog(this, 'dialogSpec');
         this.checkDialog = new CheckDialog(this, 'dialogCheck');
+        this.initialDialog.init();
         this.initialDialog.open();
-        //this.checkDialog.open();
     }
 
 
@@ -36,6 +36,7 @@ class DialogManager {
         }
         
         this.initialDialog.close();
+        this.specDialog.init()
         this.specDialog.open();
     }
 
@@ -43,12 +44,14 @@ class DialogManager {
 
         this.state.specDialog = dialogState;
         this.specDialog.close();
+        this.checkDialog.init();
         this.checkDialog.open();
     }
     
     procedeEditCheckDialog() {
-
+        
         this.checkDialog.close();
+        this.initialDialog.init();
         this.initialDialog.open();
     }
     

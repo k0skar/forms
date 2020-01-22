@@ -5,7 +5,7 @@ export default class InitialDialog extends Dialog {
     constructor(dialogManager, id) {
         super(dialogManager, id);
 
-        this.init();
+        //this.init();
     }
 
     init() {

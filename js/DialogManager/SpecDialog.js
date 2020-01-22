@@ -5,11 +5,17 @@ export default class SpecDialog extends Dialog {
     constructor(dialogManager, id) {
         super(dialogManager, id)
 
-        this.init();
+        
+        this.nextButton = this.domElement.querySelector('#btnNextSpec');
+        this.departmentDomEl = this.domElement.querySelector('#departmentSelect');
+        this.vacancyDomEl = this.domElement.querySelector('#vacancySelect');
+
+        this.departmentDomEl.addEventListener('change', this.onDepartmentSelectWrapper());
+        this.nextButton.addEventListener('click', this.onNextBtnClickWrapper());
     }
 
     init() {
-        const dataJSON = `{
+        this.dataJSON = `{
             "departments":
              { "Sales" : [ "Sales Manager", "Account Manager" ], 
                "Marketing" : [ "Creative Manager", "Marketing Coordinator", "Content Writer" ],
@@ -18,41 +24,47 @@ export default class SpecDialog extends Dialog {
         }`;
         this.selectedDepartment = null;
         this.selectedVacancy = null;
-        this.departmentDomEl = this.domElement.querySelector('#departmentSelect');
-        this.vacancyDomEl = this.domElement.querySelector('#vacancySelect');
-        const nextButton = this.domElement.querySelector('#btnNextSpec');
+        
+        const departmentsArray = Object.keys(JSON.parse(this.dataJSON).departments);
 
         this.vacancyDomEl.setAttribute('disabled', '');
-        nextButton.addEventListener('click', (e) => this.onNextBtnClick(e));
-        this.departmentDomEl.innerHTML = this.createDepartments(JSON.parse(dataJSON).departments);
-        this.departmentDomEl.addEventListener('change', (e) => this.onDepartmentSelect(e));
+             
+        this.departmentDomEl.innerHTML = this.createDepartments(departmentsArray);
+          
+        this.setInitialValues();
+    }
+
+    setInitialValues() {
+        if (this.dialogManager.state.specDialog.department) {
+            this.departmentDomEl.selectedIndex = this.dialogManager.state.specDialog.department;
+        }
+
+        if (this.dialogManager.state.specDialog.vacancy) {
+            this.vacancyDomEl.selectedIndex = this.dialogManager.state.initialDialog.vacancy;
+        }
     }
 
     createDepartments(data) {
         let optionsHtml = `<option value="" selected disabled>Departments</option>`;
 
-        for (const key in data) {
-            optionsHtml += `<option value="">${key}</option>`;
+        for (const item of data) {
+            optionsHtml += `<option value="">${item}</option>`;
         }
 
         return optionsHtml
     }
 
-    onDepartmentSelect(e) {
+    // creating a link for removeEventListener
+    onDepartmentSelectWrapper = () => this.onDepartmentSelect
+
+    onDepartmentSelect (e) {
         var selectedText = e.target[e.target.selectedIndex].text;
-        
+
         this.selectedDepartment = selectedText;
 
         // The place to make a query for an updated JSON, if that's the case
 
-        const dataJSON = `{
-            "departments":
-             { "Sales" : [ "Sales Manager", "Account Manager" ], 
-               "Marketing" : [ "Creative Manager", "Marketing Coordinator", "Content Writer" ],
-               "Technology" : [ "Project Manager", "Software Developer", "PHP programmer", "Front End", "Quality Assurance" ]
-            }
-        }`;
-        const data = JSON.parse(dataJSON).departments[selectedText];
+        const data = JSON.parse(this.dataJSON).departments[selectedText];
         this.setVacancies(data);
     }
 
@@ -60,11 +72,11 @@ export default class SpecDialog extends Dialog {
         this.vacancyDomEl.removeAttribute('disabled');
         this.vacancyDomEl.innerHTML = this.createVacancies(data);
         this.vacancyDomEl.addEventListener('change', (e) => this.onVacancySelect(e));
-    }
-    
-    onVacancySelect(e) {
+    } 
+
+    onVacancySelect = (e) => {
         var selectedText = e.target[e.target.selectedIndex].text;
-        
+
         this.selectedVacancy = selectedText;
     }
 
@@ -78,6 +90,9 @@ export default class SpecDialog extends Dialog {
         return optionsHtml
     }
 
+    // creating a link for removeEventListener
+    onNextBtnClickWrapper = () => this.onNextBtnClick
+
     onNextBtnClick(e) {
         const inputValues = this.processInputs();
 
@@ -90,7 +105,7 @@ export default class SpecDialog extends Dialog {
 
         this.departmentDomEl.parentElement.classList.remove('error');
         this.vacancyDomEl.parentElement.classList.remove('error');
-        
+
         if (!this.selectedDepartment) {
             this.departmentDomEl.parentElement.classList.add('error');
         }
