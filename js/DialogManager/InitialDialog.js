@@ -3,7 +3,7 @@ import Dialog from "./Dialog.js"
 export default class InitialDialog extends Dialog {
 
     constructor(dialogManager, id) {
-        super(...arguments);
+        super(dialogManager, id);
         const nextButton = this.domElement.querySelector('#btnNextInitial');
         nextButton.addEventListener('click', (e) => this.onNextBtnClick(e));
         this.inputsDomEl = {
@@ -15,11 +15,20 @@ export default class InitialDialog extends Dialog {
             password: this.domElement.querySelector('#password'),
             passwordConfirm: this.domElement.querySelector('#passwordConfirm'),
         };
+        this.setInitialValues();
+    }
+
+    setInitialValues() {
+        for (const key in this.inputsDomEl) {
+            if(this.dialogManager.state.initialDialog[key]) {
+                this.inputsDomEl[key].value = this.dialogManager.state.initialDialog[key];
+            }
+        } 
     }
 
     onNextBtnClick(e) {
         const inputValues = this.processInputs();
-        
+
         if (inputValues) {
             this.dialogManager.procedeNextInitialDialog(inputValues);
         }

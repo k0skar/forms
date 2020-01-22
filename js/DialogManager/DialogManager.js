@@ -1,5 +1,6 @@
 import InitialDialog from "./InitialDialog.js";
 import SpecDialog from "./SpecDialog.js";
+import CheckDialog from "./CheckDialog.js";
 
 class DialogManager {
 
@@ -7,24 +8,25 @@ class DialogManager {
 
         this.state = {
             initialDialog: {
-                firstName: '',
-                lastName: '',
-                login: '',
-                companyName: '',
-                password: '',
-                passwordConfirm: '',
+                firstName: 'Vasye',
+                lastName: 'Pupkeo',
+                login: '!VaPu11',
+                email: 'vapiu@i.ua',
+                companyName: 'Gago',
+                password: '!W1w',
+                passwordConfirm: '!W1w',
             },
             specDialog: {
-                department: '',
-                vacancy: '',
+                department: 'RND',
+                vacancy: 'Researcher',
             },
         }
 
         this.initialDialog = new InitialDialog(this, 'dialogInitial');
         this.specDialog = new SpecDialog(this, 'dialogSpec');
-        //this.checkDialog = new CheckDialog(this, 'dialogCheck');
+        this.checkDialog = new CheckDialog(this, 'dialogCheck');
         this.initialDialog.open();
-        //this.specDialog.open();
+        //this.checkDialog.open();
     }
 
 
@@ -41,13 +43,11 @@ class DialogManager {
 
         this.state.specDialog = dialogState;
         this.specDialog.close();
-        console.log(this.state)
-        // this.checkDialog.open();
+        this.checkDialog.open();
     }
     
-    procedeEditCheckDialog(dialogState) {
+    procedeEditCheckDialog() {
 
-        this.state.specDialog = dialogState;
         this.checkDialog.close();
         this.initialDialog.open();
     }

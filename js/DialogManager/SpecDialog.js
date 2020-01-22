@@ -2,10 +2,13 @@ import Dialog from "./Dialog.js"
 
 export default class SpecDialog extends Dialog {
 
-    constructor(DialogManager) {
+    constructor(dialogManager, id) {
+        super(dialogManager, id)
 
-        super(...arguments)
+        this.init();
+    }
 
+    init() {
         const dataJSON = `{
             "departments":
              { "Sales" : [ "Sales Manager", "Account Manager" ], 
@@ -101,6 +104,4 @@ export default class SpecDialog extends Dialog {
 
         return inputValues.department && inputValues.vacancy ? inputValues : false
     }
-
-
 }

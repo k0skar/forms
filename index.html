@@ -80,11 +80,28 @@
     </form>
   </dialog>
 
-  <dialog id='dialogCheck'>
-    <form>
+  <dialog id='dialogCheck' class='form-dialog'>
+    <section>
+      <header>
+        <h5 id = 'headerCheckInfo'>Check your information</h5>
+      </header>
+      <div id = 'containerItemsCheck' class = 'check-items-container'>
+        <div class='item-check'>
+          <span>Name</span>
+          <span>John Smit</span>
+        </div>
+        <div class='item-check'>
+          <span>Login</span>
+          <span>11!JohnSmit</span>
+        </div>
+      </div>
 
-      <input type="submit" value="Submit">
-    </form>
+      <footer>
+        <input id='btnEditCheck' type="button" value="Edit">
+        <input id='btnSendCheck' type="button" value="Send">
+      </footer>
+    </section>
+
   </dialog>
 
   <script type="module" src='./js/index.js'></script>
