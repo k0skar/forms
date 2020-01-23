@@ -24,8 +24,8 @@ export default class SpecDialog extends Dialog {
                "Technology" : [ "Project Manager", "Software Developer", "PHP programmer", "Front End", "Quality Assurance" ]
             }
         }`;
-        this.selectedDepartment = null;
-        this.selectedVacancy = null;
+        this.selectedDepartment = this.dialogManager.state.specDialog.department;
+        this.selectedVacancy = this.dialogManager.state.specDialog.vacancy;
 
         this.nextButton = this.domElement.querySelector('#btnNextSpec');
         const departmentsArray = Object.keys(JSON.parse(this.dataJSON).departments);
@@ -36,10 +36,21 @@ export default class SpecDialog extends Dialog {
     }
 
     createDepartments(data) {
-        let optionsHtml = `<option selected disabled>Department</option>`;
+        let optionsHtml = '';
+
+        if(!data.includes(this.selectedDepartment)) {
+            optionsHtml += `<option selected disabled>Department</option>`            
+        } else {
+            const data = JSON.parse(this.dataJSON).departments[this.selectedDepartment];
+            this.setVacancies(data);
+        }
 
         for (const item of data) {
-            optionsHtml += `<option>${item}</option>`;
+            if(item === this.dialogManager.state.specDialog.department) {
+                optionsHtml += `<option selected >${item}</option>`
+            } else {
+                optionsHtml += `<option>${item}</option>`;
+            }            
         }
 
         return optionsHtml
@@ -68,10 +79,18 @@ export default class SpecDialog extends Dialog {
     }
 
     createVacancies(data) {
-        let optionsHtml = `<option value="" selected disabled>Vacancy</option>`;
+        let optionsHtml = '';
+
+        if(!data.includes(this.selectedVacancy)) {
+            optionsHtml += `<option selected disabled>Vacancy</option>`            
+        } 
 
         for (const item of data) {
-            optionsHtml += `<option value="">${item}</option>`;
+            if(item === this.selectedVacancy) {
+                optionsHtml += `<option selected >${item}</option>`
+            } else {
+                optionsHtml += `<option>${item}</option>`;
+            }            
         }
 
         return optionsHtml
