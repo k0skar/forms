@@ -30,8 +30,10 @@ export default class SpecDialog extends Dialog {
         const departmentsArray = Object.keys(JSON.parse(this.dataJSON).departments);
 
         this.vacancyDomEl.setAttribute('disabled', '');
+
         this.departmentDomEl.innerHTML = this.createDepartments(departmentsArray);
     }
+
 
     createDepartments(data) {
         let optionsHtml = `<option value="" selected disabled>Departments</option>`;
