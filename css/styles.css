@@ -92,6 +92,15 @@ body {
   color: #E67E72;
 }
 
+.form-dialog .item-check {
+  padding: 3px 0;
+}
+
 .form-dialog .item-check>span:first-child {
   font-weight: bold;
+}
+
+.form-dialog .message-check {
+  font: 400 13.3333px sans-serif;
+  padding: 22px 0;
 }

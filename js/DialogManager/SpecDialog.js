@@ -5,13 +5,14 @@ export default class SpecDialog extends Dialog {
     constructor(dialogManager, id) {
         super(dialogManager, id)
 
-        
-        this.nextButton = this.domElement.querySelector('#btnNextSpec');
         this.departmentDomEl = this.domElement.querySelector('#departmentSelect');
         this.vacancyDomEl = this.domElement.querySelector('#vacancySelect');
+        this.nextButton = this.domElement.querySelector('#btnNextSpec');
 
-        this.departmentDomEl.addEventListener('change', this.onDepartmentSelectWrapper());
-        this.nextButton.addEventListener('click', this.onNextBtnClickWrapper());
+        //listeners are appended once on construction and live the app's lifetime
+
+        this.departmentDomEl.addEventListener('change', (e) => this.onDepartmentSelect(e));
+        this.nextButton.addEventListener('click', (e) => this.onNextBtnClick(e));
     }
 
     init() {
@@ -24,24 +25,12 @@ export default class SpecDialog extends Dialog {
         }`;
         this.selectedDepartment = null;
         this.selectedVacancy = null;
-        
+
+        this.nextButton = this.domElement.querySelector('#btnNextSpec');
         const departmentsArray = Object.keys(JSON.parse(this.dataJSON).departments);
 
         this.vacancyDomEl.setAttribute('disabled', '');
-             
         this.departmentDomEl.innerHTML = this.createDepartments(departmentsArray);
-          
-        this.setInitialValues();
-    }
-
-    setInitialValues() {
-        if (this.dialogManager.state.specDialog.department) {
-            this.departmentDomEl.selectedIndex = this.dialogManager.state.specDialog.department;
-        }
-
-        if (this.dialogManager.state.specDialog.vacancy) {
-            this.vacancyDomEl.selectedIndex = this.dialogManager.state.initialDialog.vacancy;
-        }
     }
 
     createDepartments(data) {
@@ -54,10 +43,7 @@ export default class SpecDialog extends Dialog {
         return optionsHtml
     }
 
-    // creating a link for removeEventListener
-    onDepartmentSelectWrapper = () => this.onDepartmentSelect
-
-    onDepartmentSelect (e) {
+    onDepartmentSelect(e) {
         var selectedText = e.target[e.target.selectedIndex].text;
 
         this.selectedDepartment = selectedText;
@@ -72,9 +58,9 @@ export default class SpecDialog extends Dialog {
         this.vacancyDomEl.removeAttribute('disabled');
         this.vacancyDomEl.innerHTML = this.createVacancies(data);
         this.vacancyDomEl.addEventListener('change', (e) => this.onVacancySelect(e));
-    } 
+    }
 
-    onVacancySelect = (e) => {
+    onVacancySelect(e) {
         var selectedText = e.target[e.target.selectedIndex].text;
 
         this.selectedVacancy = selectedText;
@@ -89,9 +75,6 @@ export default class SpecDialog extends Dialog {
 
         return optionsHtml
     }
-
-    // creating a link for removeEventListener
-    onNextBtnClickWrapper = () => this.onNextBtnClick
 
     onNextBtnClick(e) {
         const inputValues = this.processInputs();
