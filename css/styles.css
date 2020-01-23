@@ -104,3 +104,17 @@ body {
   font: 400 13.3333px sans-serif;
   padding: 22px 0;
 }
+
+/* dialog.dialog-spec[open], dialog.dialog-check[open]  {
+  animation-delay: 1s;
+  animation: show 1s ease normal;
+}
+
+@keyframes show{
+  from {
+      transform: translateX(-110%);
+  }
+  to {
+      transform: translateX(0%);
+  }
+} */
