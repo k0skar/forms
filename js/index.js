@@ -1,6 +1,3 @@
-window.onload = () => {
-    new DialogManager();
-}
 
 class DialogManager {
 
@@ -431,3 +428,4 @@ class CheckDialog extends Dialog {
     }
 }
 
+new DialogManager();
