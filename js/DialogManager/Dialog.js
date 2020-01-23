@@ -15,6 +15,7 @@ export default class Dialog {
             this.domElement.show();
         } else {
             this.domElement.setAttribute('open')
+            this.domElement.setAttribute('display', 'block')
         }
 
     }
@@ -27,6 +28,7 @@ export default class Dialog {
             this.domElement.close();
         } else {
             this.domElement.removeAttribute('open')
+            this.domElement.setAttribute('display', 'none')
         }
     }
 }

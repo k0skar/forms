@@ -1,6 +1,6 @@
 import Dialog from "./Dialog.js"
 
-export default class InitialDialog extends Dialog {
+export default class CheckDialog extends Dialog {
 
     constructor(dialogManager, id) {
         super(dialogManager, id);
