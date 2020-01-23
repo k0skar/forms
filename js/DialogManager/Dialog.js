@@ -1,8 +1,7 @@
 
-
 export default class Dialog {
 
-    constructor(dialogManager, id) {        
+    constructor(dialogManager, id) {
         this.dialogManager = dialogManager;
         this.domElement = document.getElementById(id);
     }

@@ -4,7 +4,7 @@ import CheckDialog from "./CheckDialog.js";
 
 class DialogManager {
 
-    constructor () {
+    constructor() {
 
         this.state = {
             initialDialog: {
@@ -31,10 +31,10 @@ class DialogManager {
 
 
     procedeNextInitialDialog(dialogState) {
-        if(dialogState.hasOwnProperty(Object.keys(this.state.initialDialog)[0])) {
+        if (dialogState.hasOwnProperty(Object.keys(this.state.initialDialog)[0])) {
             this.state.initialDialog = dialogState;
         }
-        
+
         this.initialDialog.close();
         this.specDialog.init()
         this.specDialog.open();
@@ -47,19 +47,19 @@ class DialogManager {
         this.checkDialog.init();
         this.checkDialog.open();
     }
-    
+
     procedeEditCheckDialog() {
-        
+
         this.checkDialog.close();
         this.initialDialog.init();
         this.initialDialog.open();
     }
-    
+
     procedeSendCheckDialog() {
-        
+
         localStorage.setItem('userInfo', JSON.stringify(this.state));
         this.checkDialog.setThanks();
     }
 }
- 
+
 export default DialogManager;

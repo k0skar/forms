@@ -38,19 +38,19 @@ export default class SpecDialog extends Dialog {
     createDepartments(data) {
         let optionsHtml = '';
 
-        if(!data.includes(this.selectedDepartment)) {
-            optionsHtml += `<option selected disabled>Department</option>`            
+        if (!data.includes(this.selectedDepartment)) {
+            optionsHtml += `<option selected disabled>Department</option>`
         } else {
             const data = JSON.parse(this.dataJSON).departments[this.selectedDepartment];
             this.setVacancies(data);
         }
 
         for (const item of data) {
-            if(item === this.dialogManager.state.specDialog.department) {
+            if (item === this.dialogManager.state.specDialog.department) {
                 optionsHtml += `<option selected >${item}</option>`
             } else {
                 optionsHtml += `<option>${item}</option>`;
-            }            
+            }
         }
 
         return optionsHtml
@@ -81,16 +81,16 @@ export default class SpecDialog extends Dialog {
     createVacancies(data) {
         let optionsHtml = '';
 
-        if(!data.includes(this.selectedVacancy)) {
-            optionsHtml += `<option selected disabled>Vacancy</option>`            
-        } 
+        if (!data.includes(this.selectedVacancy)) {
+            optionsHtml += `<option selected disabled>Vacancy</option>`
+        }
 
         for (const item of data) {
-            if(item === this.selectedVacancy) {
+            if (item === this.selectedVacancy) {
                 optionsHtml += `<option selected >${item}</option>`
             } else {
                 optionsHtml += `<option>${item}</option>`;
-            }            
+            }
         }
 
         return optionsHtml

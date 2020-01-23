@@ -4,13 +4,13 @@ export default class InitialDialog extends Dialog {
 
     constructor(dialogManager, id) {
         super(dialogManager, id);
-        
+
         const nextButton = this.domElement.querySelector('#btnNextInitial');
         nextButton.addEventListener('click', (e) => this.onNextBtnClick(e));
     }
 
     init() {
-        
+
         this.inputsDomEl = {
             firstName: this.domElement.querySelector('#firstName'),
             lastName: this.domElement.querySelector('#lastName'),
@@ -25,10 +25,10 @@ export default class InitialDialog extends Dialog {
 
     setInitialValues() {
         for (const key in this.inputsDomEl) {
-            if(this.dialogManager.state.initialDialog[key]) {
+            if (this.dialogManager.state.initialDialog[key]) {
                 this.inputsDomEl[key].value = this.dialogManager.state.initialDialog[key];
             }
-        } 
+        }
     }
 
     onNextBtnClick(e) {
