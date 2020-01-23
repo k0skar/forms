@@ -8,17 +8,17 @@ class DialogManager {
 
         this.state = {
             initialDialog: {
-                firstName: 'Vasye',
-                lastName: 'Pupkeo',
-                login: '!VaPu11',
-                email: 'vapiu@i.ua',
-                companyName: 'Gago',
-                password: '!W1w',
-                passwordConfirm: '!W1w',
+                firstName: '',
+                lastName: '',
+                login: '',
+                email: '',
+                companyName: '',
+                password: '',
+                passwordConfirm: '',
             },
             specDialog: {
-                department: 'RND',
-                vacancy: 'Researcher',
+                department: '',
+                vacancy: '',
             },
         }
 
@@ -57,7 +57,8 @@ class DialogManager {
     
     procedeSendCheckDialog() {
         
-        this.specDialog.close();
+        localStorage.setItem('userInfo', JSON.stringify(this.state));
+        this.checkDialog.setThanks();
     }
 }
  

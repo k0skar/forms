@@ -6,7 +6,7 @@ export default class InitialDialog extends Dialog {
         super(dialogManager, id);
 
         const sendButton = this.domElement.querySelector('#btnSendCheck');
-        const editButton = this.domElement.querySelector('#btnEditCheck');        
+        const editButton = this.domElement.querySelector('#btnEditCheck');
 
         //listeners are appended once on construction and live the app's lifetime
 
@@ -15,7 +15,7 @@ export default class InitialDialog extends Dialog {
     }
 
     init() {
-        
+
         const itemsContainer = this.domElement.querySelector('#containerItemsCheck');
         itemsContainer.innerHTML = this.createItems({ ...this.dialogManager.state.initialDialog, ...this.dialogManager.state.specDialog });
     }
@@ -43,8 +43,6 @@ export default class InitialDialog extends Dialog {
                           </div>`;
         }
 
-        itemsHtml += ``
-
         return itemsHtml
     }
 
@@ -54,5 +52,13 @@ export default class InitialDialog extends Dialog {
 
     onEditBtnClick() {
         this.dialogManager.procedeEditCheckDialog();
+    }
+
+    setThanks() {
+        const section = this.domElement.querySelector('#sectionCheck');
+
+        section.innerHTML = `<footer>
+                                <h5>Thank you!</h5>
+                             </footer>`
     }
 }

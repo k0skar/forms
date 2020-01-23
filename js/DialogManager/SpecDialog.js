@@ -11,6 +11,7 @@ export default class SpecDialog extends Dialog {
 
         //listeners are appended once on construction and live the app's lifetime
 
+        this.vacancyDomEl.addEventListener('change', (e) => this.onVacancySelect(e));
         this.departmentDomEl.addEventListener('change', (e) => this.onDepartmentSelect(e));
         this.nextButton.addEventListener('click', (e) => this.onNextBtnClick(e));
     }
@@ -34,12 +35,11 @@ export default class SpecDialog extends Dialog {
         this.departmentDomEl.innerHTML = this.createDepartments(departmentsArray);
     }
 
-
     createDepartments(data) {
-        let optionsHtml = `<option value="" selected disabled>Departments</option>`;
+        let optionsHtml = `<option selected disabled>Department</option>`;
 
         for (const item of data) {
-            optionsHtml += `<option value="">${item}</option>`;
+            optionsHtml += `<option>${item}</option>`;
         }
 
         return optionsHtml
@@ -59,7 +59,6 @@ export default class SpecDialog extends Dialog {
     setVacancies(data) {
         this.vacancyDomEl.removeAttribute('disabled');
         this.vacancyDomEl.innerHTML = this.createVacancies(data);
-        this.vacancyDomEl.addEventListener('change', (e) => this.onVacancySelect(e));
     }
 
     onVacancySelect(e) {
